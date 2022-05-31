@@ -1,22 +1,21 @@
-"""djangovet URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
 from django.urls import path, include
 
+from . import views
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('vetoffice.urls')),
+   path('', views.home, name="home"),
+   path('account/', include('django.contrib.auth.urls'), name="login"),
+   path('signup/', views.SignUp.as_view(), name='signup'),
+   path('owner/list', views.OwnerList.as_view(), name="ownerlist"),
+   path('owner/create', views.OwnerCreate.as_view(), name="ownercreate"),
+   path('owner/update/<pk>', views.OwnerUpdate.as_view(), name="ownerupdate"),
+   path('owner/delete/<pk>', views.OwnerDelete.as_view(), name="ownerdelete"),
+   path('patient/list', views.PatientList.as_view(), name="patientlist"),
+   path('patient/create', views.PatientCreate.as_view(), name="patientcreate"),
+   path('patient/update/<pk>', views.PatientUpdate.as_view(), name="patientupdate"),
+   path('patient/delete/<pk>', views.PatientDelete.as_view(), name="patientdelete"),
+   path('appointment/list', views.AppointmentList.as_view(), name="apptlist"),
+   path('appointment/create', views.AppointmentCreate.as_view(), name="apptcreate"),
+   path('appointment/update/<pk>', views.AppointmentUpdate.as_view(), name="apptupdate"),
+   path('appointment/delete/<pk>', views.AppointmentDelete.as_view(), name="apptdelete"),
 ]
